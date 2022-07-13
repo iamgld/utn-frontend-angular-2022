@@ -1,4 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { Hero } from 'src/app/interfaces/hero';
 
 @Component({
@@ -7,13 +9,14 @@ import { Hero } from 'src/app/interfaces/hero';
   styleUrls: ['./card.component.css'],
 })
 export class CardComponent {
-  @Input() hero!: Hero
+  @Input() hero!: Hero;
   @Output() removeChild = new EventEmitter<Hero>();
 
-  constructor() {}
+  constructor(private _router: Router) {}
 
   onClick(): void {
     console.log('click', this.hero);
+    this._router.navigate(['/cards', this.hero.id]);
   }
 
   onRemove(): void {
